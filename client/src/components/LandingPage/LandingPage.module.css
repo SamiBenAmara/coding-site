@@ -1,0 +1,9 @@
+.main {
+    background-image: linear-gradient(to right, oklch(54.1% 0.281 293.009), oklch(51.1% 0.262 276.966));
+    height: 100vh
+}
+
+.landingPageBodyContainer {
+    display: flex;
+    flex-direction: row;
+}
