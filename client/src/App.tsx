@@ -1,10 +1,25 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import LandingPage from './components/LandingPage/LandingPage'
+import LoginSignupPage from './components/LoginSignupPage/LoginSignupPage';
 
-function App() {
+const router = createBrowserRouter([
+
+  {
+    path: '/',
+    element: <LandingPage />,
+  },
+  {
+    path: '/login-signup',
+    element: <LoginSignupPage />,
+  },
+
+]);
+
+const App: React.FC = () => {
 
   return (
-    <LandingPage />      
+    <RouterProvider router={router} />      
   )
 }
 
