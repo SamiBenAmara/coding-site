@@ -13,6 +13,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:5173"})
 @RequestMapping("/user")
 public class UserController {
 
@@ -29,9 +30,9 @@ public class UserController {
 
         try {
             userService.createUser(user);
-            return new ResponseEntity<>("User has been created", HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
