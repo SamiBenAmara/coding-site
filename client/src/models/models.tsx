@@ -12,6 +12,11 @@ export interface SignupForm {
     password: string,
 }
 
+export interface LoginForm {
+    firstName: string,
+    lastName: string
+}
+
 export interface SignupResponse {
     firstName: string,
     lastName: string,
