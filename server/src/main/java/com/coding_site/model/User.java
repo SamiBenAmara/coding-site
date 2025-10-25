@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -40,7 +40,7 @@ public class User {
     }
 
     public Long getId() {
-        return id;
+        return userId;
     }
 
     public String getFirstName() {
@@ -57,10 +57,6 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setFirstName(String firstName) {
@@ -82,7 +78,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
