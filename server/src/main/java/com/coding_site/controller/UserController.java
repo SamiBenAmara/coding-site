@@ -3,13 +3,12 @@ package com.coding_site.controller;
 import com.coding_site.dto.UserDto;
 import com.coding_site.model.User;
 import com.coding_site.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -36,4 +35,15 @@ public class UserController {
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UserDto> userLogin(@RequestBody User user) {
+        
+        try {
+            UserDto foundUser = userService.loginUser(user);
+            return new ResponseEntity<>(foundUser, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
 }

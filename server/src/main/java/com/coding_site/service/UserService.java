@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +32,22 @@ public class UserService {
         } catch (Exception e) {
             throw new IllegalStateException("USER CANNOT BE CREATED");
         }
+    }
+
+    public UserDto loginUser(User user) {
+
+        try {
+            User foundUser = userRepository.findByEmail(user.getEmail());
+
+            if (foundUser == null || !foundUser.getPassword().equals(user.getPassword())) {
+                throw new IllegalStateException("USER DOES NOT EXIST");
+            } else {
+                return new UserDto(foundUser.getFirstName(), foundUser.getLastName(), foundUser.getEmail());
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("USER DOES NOT EXIST");
+        }
+        
     }
 
 }
