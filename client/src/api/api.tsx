@@ -1,10 +1,12 @@
 import type { User } from "../models/models";
 
-export const signup = async (user: User): Promise<void> => {
+const BASE_URL = 'http://localhost:8080';
+
+export const signupUser = async (user: User): Promise<void> => {
 
     try {
 
-        await fetch('http://localhost:8080/user/signup', {
+        await fetch(`${BASE_URL}/user/signup`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -19,5 +21,23 @@ export const signup = async (user: User): Promise<void> => {
     } catch (error) {
         console.log(error);
     }
+
+}
+
+export const loginUser = async (email: string, password: string): Promise<void> => {
+
+    await fetch(`${BASE_URL}/user/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "email": email, "password": password })
+    }).then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+    }).catch(err => {
+        console.log(err.message);
+    })
 
 }
