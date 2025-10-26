@@ -1,0 +1,12 @@
+.main {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
