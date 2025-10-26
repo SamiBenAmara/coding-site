@@ -2,6 +2,8 @@ package com.coding_site.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users_table")
 public class User {
@@ -21,6 +23,18 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    public List<Post> userPosts;
+
+    @OneToMany(mappedBy = "user")
+    public List<Post> sharedPosts;
+
+    @OneToMany(mappedBy = "user")
+    public List<Post> savedPosts;
+
+    @OneToMany(mappedBy = "user")
+    public List<Post> likedPosts;
 
     public User() {
 
