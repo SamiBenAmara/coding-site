@@ -22,3 +22,9 @@ export interface SignupResponse {
     lastName: string,
     email: string
 }
+
+export interface PostModel {
+    userId: number,
+    postTitle: string,
+    postCaption: string
+}
