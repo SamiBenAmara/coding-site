@@ -35,3 +35,8 @@
     border-width: 1px;
     border: solid;
 }
+
+.createPostContainer {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,4 +1,4 @@
-import type { User } from "../models/models";
+import type { PostModel, User } from "../models/models";
 
 const BASE_URL = 'http://localhost:8080';
 
@@ -21,7 +21,6 @@ export const signupUser = async (user: User): Promise<void> => {
     } catch (error) {
         console.log(error);
     }
-
 }
 
 export const loginUser = async (email: string, password: string): Promise<void> => {
@@ -39,5 +38,27 @@ export const loginUser = async (email: string, password: string): Promise<void> 
     }).catch(err => {
         console.log(err.message);
     })
+}
 
+export const createPost = async (postData: PostModel): Promise<void> => {
+
+    try {
+
+        await fetch(`${BASE_URL}/user/createPost`,  {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error("POST COULD NOT BE CREATED");
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+
+    } catch (err) {
+        console.log(err);
+    }
 }
