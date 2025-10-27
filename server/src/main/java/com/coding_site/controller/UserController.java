@@ -1,5 +1,6 @@
 package com.coding_site.controller;
 
+import com.coding_site.dto.PostDto;
 import com.coding_site.dto.UserDto;
 import com.coding_site.model.User;
 import com.coding_site.service.UserService;
@@ -45,5 +46,16 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @PostMapping("/createPost")
+    public ResponseEntity<String> createPost(@RequestBody PostDto postDto) {
+
+        try {
+            userService.createPost(postDto);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("POST COULD NOT BE CREATED", HttpStatus.BAD_REQUEST);
+        }
     }
 }
