@@ -15,6 +15,12 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
+    @Column(name = "post_title")
+    private String postTitle;
+
+    @Column(name = "post_caption")
+    private String postCaption;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -36,8 +42,9 @@ public class Post {
 
     }
 
-    public Post(Long postId, User user, Long likeCount) {
-        this.postId = postId;
+    public Post(String postTitle, String postCaption, User user, Long likeCount) {
+        this.postTitle = postTitle;
+        this.postCaption = postCaption;
         this.user = user;
         this.likeCount = likeCount;
     }
@@ -45,6 +52,14 @@ public class Post {
     public Long getPostId() {
         return postId;
     }
+
+    public String getPostTitle() { return postTitle; }
+
+    public void setPostTitle(String postTitle) { this.postTitle = postTitle; }
+
+    public String getPostCaption() { return postCaption;}
+
+    public void setPostCaption(String postCaption) { this.postCaption = postCaption; }
 
     public User getUser() {
         return user;
@@ -58,7 +73,7 @@ public class Post {
         return likeCount;
     }
 
-    public void setLike(Long likeCount) {
+    public void setLikeCount(Long likeCount) {
         this.likeCount = likeCount;
     }
 }
