@@ -2,34 +2,24 @@ package com.coding_site.dto;
 
 public class UserDto {
 
-    private String firstName;
-    private String lastName;
+    private Long userId;
     private String email;
 
     public UserDto() {
 
     }
 
-    public UserDto(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public UserDto(Long userId, String email) {
+        this.userId = userId;
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -43,8 +33,7 @@ public class UserDto {
     @Override
     public String toString() {
         return "UserDto{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", userId='" + userId + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

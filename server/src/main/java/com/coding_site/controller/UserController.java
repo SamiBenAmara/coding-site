@@ -26,11 +26,11 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> userSignup(@RequestBody User user) {
+    public ResponseEntity<UserDto> userSignup(@RequestBody User user) {
 
         try {
-            userService.createUser(user);
-            return new ResponseEntity<>(HttpStatus.OK);
+            UserDto foundUser = userService.createUser(user);
+            return new ResponseEntity<>(foundUser, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

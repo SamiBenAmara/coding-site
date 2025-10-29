@@ -26,13 +26,14 @@ public class UserService {
 
         List<User> userList = userRepository.findAll();
 
-        return userList.stream().map(user -> new UserDto(user.getFirstName(), user.getLastName(), user.getEmail()) ).collect(Collectors.toList());
+        return userList.stream().map(user -> new UserDto(user.getId(), user.getEmail())).collect(Collectors.toList());
     }
 
-    public User createUser(User user) {
+    public UserDto createUser(User user) {
 
         try {
-            return userRepository.save(user);
+            userRepository.save(user);
+            return new UserDto(user.getId(), user.getEmail());
         } catch (Exception e) {
             throw new IllegalStateException("USER CANNOT BE CREATED");
         }
@@ -46,7 +47,7 @@ public class UserService {
             if (foundUser == null || !foundUser.getPassword().equals(user.getPassword())) {
                 throw new IllegalStateException("USER DOES NOT EXIST");
             } else {
-                return new UserDto(foundUser.getFirstName(), foundUser.getLastName(), foundUser.getEmail());
+                return new UserDto(foundUser.getId(), foundUser.getEmail());
             }
         } catch (Exception e) {
             throw new IllegalStateException("USER DOES NOT EXIST");
