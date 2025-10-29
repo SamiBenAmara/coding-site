@@ -9,6 +9,7 @@ import com.coding_site.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -78,6 +79,49 @@ public class UserService {
 
         } catch (Exception e) {
             throw new IllegalStateException("CANNOT CREATE POST");
+        }
+    }
+
+    public void followUser(Long userId, Long followingId) {
+
+        try {
+
+            Optional<User> user = userRepository.findById(userId);
+
+            if (user.isPresent()) {
+
+                Optional<User> user_following = userRepository.findById(followingId);
+                if (user_following.isPresent()) {
+                    user.get().followUser(user_following.get());
+                }
+
+                userRepository.save(user.get());
+            } else {
+                throw new IllegalStateException("USER NOT FOUND");
+            }
+
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    public void unfollowUser(Long userId, Long followingId) {
+
+        try {
+
+            Optional<User> user = userRepository.findById(userId);
+
+            if (user.isPresent()) {
+
+                Optional<User> followingUser = userRepository.findById(followingId);
+                user.get().unfollowUser(followingUser.get());
+
+            }
+
+            userRepository.save(user.get());
+
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
 
     }

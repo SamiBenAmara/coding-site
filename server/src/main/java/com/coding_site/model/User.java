@@ -2,7 +2,9 @@ package com.coding_site.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users_table")
@@ -24,17 +26,28 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    public List<Post> userPosts;
+    @ManyToMany
+    @JoinTable(
+            name = "following_table",
+            joinColumns = @JoinColumn(name = "follower_id"),
+            inverseJoinColumns = @JoinColumn(name = "following_id")
+    )
+    private Set<User> following = new HashSet<>();
+
+    @ManyToMany(mappedBy = "following")
+    private Set<User> followers = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
-    public List<Post> sharedPosts;
+    private List<Post> userPosts;
 
     @OneToMany(mappedBy = "user")
-    public List<Post> savedPosts;
+    private List<Post> sharedPosts;
 
     @OneToMany(mappedBy = "user")
-    public List<Post> likedPosts;
+    private List<Post> savedPosts;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> likedPosts;
 
     public User() {
 
@@ -87,6 +100,30 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<User> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<User> following) {
+        this.following = following;
+    }
+
+    public Set<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<User> followers) {
+        this.followers = followers;
+    }
+
+    public void followUser(User user) {
+        this.following.add(user);
+    }
+
+    public void unfollowUser(User user) {
+        this.following.remove(user);
     }
 
     @Override
