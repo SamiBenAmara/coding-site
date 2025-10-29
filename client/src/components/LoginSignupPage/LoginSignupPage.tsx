@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import styles from './LoginSignupPage.module.css';
 import { useNavigate } from 'react-router-dom';
-import { type SignupForm, type User } from '../../models/models';
+import { type SignupForm, type User, type UserState } from '../../models/models';
 import { signupUser, loginUser } from '../../api/api';
+import { useDispatch } from 'react-redux';
+import { loginSignup } from '../../app/userSlice';
+import type { AppDispatch } from '../../app/store';
 
 const LoginSignupPage: React.FC = () => {
   
     const [formData, setFormData] = useState<SignupForm>({ firstName: "", lastName: "", email: "", password: "" });
+
+    const dispatch: AppDispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -20,7 +25,9 @@ const LoginSignupPage: React.FC = () => {
 
         try {
 
-            await loginUser(formData.email, formData.password);
+            const response = await loginUser(formData.email, formData.password);
+
+            dispatch(loginSignup(response));
 
             navigate('/home');
 
@@ -43,7 +50,9 @@ const LoginSignupPage: React.FC = () => {
                 password: formData.password,
             }
 
-            await signupUser(user);
+            const response = await signupUser(user);
+
+            dispatch(loginSignup(response));
 
             navigate('/home');
             
