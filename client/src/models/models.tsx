@@ -28,3 +28,8 @@ export interface PostModel {
     postTitle: string,
     postCaption: string
 }
+
+export interface UserState {
+    userId: number;
+    email: string;
+}
