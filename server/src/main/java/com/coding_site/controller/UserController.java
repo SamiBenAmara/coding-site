@@ -5,12 +5,14 @@ import com.coding_site.dto.UserDto;
 import com.coding_site.model.User;
 import com.coding_site.service.UserService;
 
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:5173"})
@@ -57,5 +59,38 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>("POST COULD NOT BE CREATED", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/followUser")
+    public ResponseEntity<String> followUser(@RequestBody Map<String, Long> requestBody) {
+
+        try {
+
+            Long userId = requestBody.get("userId");
+            Long followingId = requestBody.get("followingId");
+
+            userService.followUser(userId, followingId);
+            return new ResponseEntity<>(HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/unfollowUser")
+    public ResponseEntity<String> unfollowUser(@RequestBody Map<String, Long> requestBody) {
+
+        try {
+
+            Long userId = requestBody.get("userId");
+            Long followingId = requestBody.get("followingId");
+
+            userService.unfollowUser(userId, followingId);
+            return new ResponseEntity<>(HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
