@@ -91,6 +91,18 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
 
+    @GetMapping("/getUserInfo")
+    public ResponseEntity<UserDto> getUserInfo(@RequestParam Long userId) {
+
+        try {
+
+            UserDto userDto = userService.getUserInfo(userId);
+            return new ResponseEntity<>(userDto, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }
