@@ -2,6 +2,7 @@ package com.coding_site.service;
 
 import com.coding_site.dto.PostDto;
 import com.coding_site.dto.UserDto;
+import com.coding_site.mapper.UserMapper;
 import com.coding_site.model.Post;
 import com.coding_site.model.User;
 import com.coding_site.repository.PostRepository;
@@ -123,7 +124,23 @@ public class UserService {
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
+    }
 
+    public UserDto getUserInfo(Long userId) {
+
+        try {
+
+            Optional<User> user = userRepository.findById(userId);
+
+            if (user.isPresent()) {
+                return UserMapper.fullToDto(user.get());
+            } else {
+                throw new IllegalStateException("USER NOT FOUND");
+            }
+
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
     }
 
 }
