@@ -1,0 +1,34 @@
+.homePageBody {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.left {
+    height: 100vh;
+    width: 25%;
+    border-width: 1px;
+    border: solid;
+}
+
+.center {
+    height: 100vh;
+    width: 50%;
+    border-width: 1px;
+    border: solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    height: 100vh;
+    width: 25%;
+    border-width: 1px;
+    border: solid;
+}
+
+.createPostContainer {
+    display: flex;
+    flex-direction: column;
+}
