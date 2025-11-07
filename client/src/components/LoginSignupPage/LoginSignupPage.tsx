@@ -29,6 +29,9 @@ const LoginSignupPage: React.FC = () => {
 
             dispatch(loginSignup(response));
 
+            localStorage.setItem('userId', String(response.userId));
+            localStorage.setItem('email', response.email);
+
             navigate('/home');
 
         } catch (error) {
