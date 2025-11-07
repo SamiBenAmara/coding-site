@@ -27,8 +27,8 @@ public class Job {
     @Column(name = "salary_high")
     public Long highSalary;
 
-    @Column(name = "salary_hourly")
-    public Long hourlySalary;
+    @Column(name = "hourlyOrSalary")
+    public Long hourlyOrSalary;
 
     @Column(name = "city")
     public String city;
@@ -41,6 +41,52 @@ public class Job {
 
     @OneToMany(mappedBy = "job")
     public List<Skill> jobSkill;
+
+    public Job() {
+
+    }
+
+    public Job(String jobName,
+               String company,
+               String jobDepartment,
+               Long lowSalary,
+               Long highSalary,
+               Long hourlyOrSalary,
+               String city,
+               String stateProvince,
+               String country) {
+        this.jobName = jobName;
+        this.company = company;
+        this.jobDepartment = jobDepartment;
+        this.lowSalary = lowSalary;
+        this.highSalary = highSalary;
+        this.hourlyOrSalary = hourlyOrSalary;
+        this.city = city;
+        this.stateProvince = stateProvince;
+        this.country = country;
+    }
+
+    public Job(String jobName,
+               String company,
+               String jobDepartment,
+               Long lowSalary,
+               Long highSalary,
+               Long hourlyOrSalary,
+               String city,
+               String stateProvince,
+               String country,
+               List<Skill> jobSkill) {
+        this.jobName = jobName;
+        this.company = company;
+        this.jobDepartment = jobDepartment;
+        this.lowSalary = lowSalary;
+        this.highSalary = highSalary;
+        this.hourlyOrSalary = hourlyOrSalary;
+        this.city = city;
+        this.stateProvince = stateProvince;
+        this.country = country;
+        this.jobSkill = jobSkill;
+    }
 
     public Long getJobId() {
         return jobId;
@@ -87,11 +133,19 @@ public class Job {
     }
 
     public Long getHourlySalary() {
-        return hourlySalary;
+        return hourlyOrSalary;
     }
 
-    public void setHourlySalary(Long hourlySalary) {
-        this.hourlySalary = hourlySalary;
+    public void setHourlySalary(Long hourlyOrSalary) {
+        this.hourlyOrSalary = hourlyOrSalary;
+    }
+
+    public Long getHourlyOrSalary() {
+        return hourlyOrSalary;
+    }
+
+    public void setHourlyOrSalary(Long hourlyOrSalary) {
+        this.hourlyOrSalary = hourlyOrSalary;
     }
 
     public String getCity() {
@@ -118,6 +172,14 @@ public class Job {
         this.country = country;
     }
 
+    public List<Skill> getJobSkill() {
+        return jobSkill;
+    }
+
+    public void setJobSkill(List<Skill> jobSkill) {
+        this.jobSkill = jobSkill;
+    }
+
     @Override
     public String toString() {
         return "Job{" +
@@ -127,7 +189,7 @@ public class Job {
                 ", jobDepartment='" + jobDepartment + '\'' +
                 ", lowSalary=" + lowSalary +
                 ", highSalary=" + highSalary +
-                ", hourlySalary=" + hourlySalary +
+                ", hourlyOrSalary=" + hourlyOrSalary +
                 ", city='" + city + '\'' +
                 ", stateProvince='" + stateProvince + '\'' +
                 ", country='" + country + '\'' +
