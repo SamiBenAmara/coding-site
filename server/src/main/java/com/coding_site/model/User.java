@@ -2,6 +2,7 @@ package com.coding_site.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,6 +52,14 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Post> likedPosts;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_projects",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private List<Project> projects = new ArrayList<>();
 
     public User() {
 
