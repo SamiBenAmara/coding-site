@@ -1,1 +1,1 @@
-export type PAGE = 'HOME' | 'PROFILE';
+export type PAGE = 'HOME' | 'PROFILE' | 'JOBS';

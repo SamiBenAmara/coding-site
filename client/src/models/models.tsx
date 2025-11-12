@@ -6,6 +6,19 @@ export interface User {
     password: string
 }
 
+export interface JobModel {
+    jobName: string,
+    company: string,
+    jobDepartment: string,
+    lowSalary: number,
+    highSalary: number,
+    hourlyOrSalary: number,
+    city: string,
+    stateProvince: string,
+    country: string,
+    skills ?: string[]
+}
+
 export interface UserDto {
     firstName: string,
     lastName: string,

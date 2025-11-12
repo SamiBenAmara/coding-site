@@ -1,4 +1,4 @@
-import type { PostModel, User, UserState } from "../models/models";
+import type { JobModel, PostModel, User, UserState } from "../models/models";
 
 const BASE_URL = 'http://localhost:8080';
 
@@ -73,5 +73,30 @@ export const createPost = async (postData: PostModel): Promise<void> => {
 
     } catch (err) {
         console.log(err);
+    }
+}
+
+export const createJob = async (job: JobModel): Promise<JobModel> => {
+
+    try {
+
+        const response = await fetch(`${BASE_URL}/job/createJob`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(job)      
+        });     
+
+        if (!response.ok) {
+            throw new Error("FAILED TO CREATE JOB");
+        }
+
+        const newJob: JobModel = await response.json();
+        return newJob;
+
+    } catch (err) {
+        console.log(err);
+        throw err;
     }
 }
