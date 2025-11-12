@@ -4,6 +4,7 @@ import styles from './HomePage.module.css';
 import HomePageBody from '../HomePageBody/HomePageBody';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import type { PAGE } from '../../types/types';
+import JobsPage from '../JobsPage/JobsPage';
 
 const HomePage = () => {
 
@@ -14,6 +15,7 @@ const HomePage = () => {
         <HomePageNavbar setPage={setPage} />
         { page === 'HOME' && <HomePageBody />  }
         { page === 'PROFILE' && <ProfilePage /> }
+        { page === 'JOBS' && <JobsPage /> }
     </div>
   )
 }

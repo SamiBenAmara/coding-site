@@ -1,0 +1,25 @@
+.jobsPageContainer {
+    width: 90%;
+    height: 100vh;
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+}
+
+.jobsPageSidebar {
+    width: 30%;
+    height: 100vh;
+    background-color: gainsboro;
+    display: flex;
+    flex-direction: column;
+}
+
+.jobsPageMainBody {
+    width: 70%;
+    height: 100vh;
+    background-color: green;
+}
+
+.jobsSidebarButton {
+    
+}
