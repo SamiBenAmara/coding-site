@@ -1,5 +1,6 @@
 package com.coding_site.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -53,13 +54,17 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Post> likedPosts;
 
+    @OneToMany(mappedBy = "owner")
+    @JsonIgnore
+    private Set<Project> ownedProjects = new HashSet<>();
+
     @ManyToMany
     @JoinTable(
             name = "user_projects",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
-    private List<Project> projects = new ArrayList<>();
+    private List<Project> projects;
 
     public User() {
 
@@ -72,6 +77,15 @@ public class User {
     }
 
     public User(String firstName, String lastName, String userName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(Long Id, String firstName, String lastName, String userName, String email, String password) {
+        this.userId = Id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -141,6 +155,10 @@ public class User {
 
     public void unfollowUser(User user) {
         this.following.remove(user);
+    }
+
+    public void addUserProject(Project project) {
+        this.ownedProjects.add(project);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.coding_site.dto;
 
+import com.coding_site.model.Project;
+
 public class UserDto {
 
     private Long userId;
@@ -11,8 +13,16 @@ public class UserDto {
     private String userName;
     private String email;
 
+    private Project project;
+
     public UserDto() {
 
+    }
+
+    // For creating a new project
+    public UserDto(Long userId, Project project) {
+        this.userId = userId;
+        this.project = project;
     }
 
     public UserDto(Long userId, String email) {
@@ -66,6 +76,14 @@ public class UserDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     @Override

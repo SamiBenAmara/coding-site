@@ -11,7 +11,14 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long projectId;
+
+    @Column(name = "project_name")
+    private String projectName;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User owner;
 
     @Column(name = "project_type")
     private String projectType;
@@ -28,14 +35,32 @@ public class Project {
     private int views;
 
     @ManyToMany(mappedBy = "projects")
-    private Set<User> users = new HashSet<>();
+    private Set<User> users;
 
     public Project() {
 
     }
 
-    public Project(Long id, String projectType, List<String> projectLanguages, List<String> projectTechnologies, int views) {
-        this.id = id;
+    public Project(Long projectId, String projectName, String projectType, List<String> projectLanguages, List<String> projectTechnologies, int views) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.projectType = projectType;
+        this.projectLanguages = projectLanguages;
+        this.projectTechnologies = projectTechnologies;
+        this.views = views;
+    }
+
+    public Project(String projectName, String projectType, List<String> projectLanguages, List<String> projectTechnologies, int views) {
+        this.projectName = projectName;
+        this.projectType = projectType;
+        this.projectLanguages = projectLanguages;
+        this.projectTechnologies = projectTechnologies;
+        this.views = views;
+    }
+
+    public Project(String projectName, User owner, String projectType, List<String> projectLanguages, List<String> projectTechnologies, int views) {
+        this.projectName = projectName;
+        this.owner = owner;
         this.projectType = projectType;
         this.projectLanguages = projectLanguages;
         this.projectTechnologies = projectTechnologies;
@@ -43,12 +68,16 @@ public class Project {
     }
 
     public Long getId() {
-        return id;
+        return projectId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long projectIdd) {
+        this.projectId = projectId;
     }
+
+    public String getProjectName() { return projectName; }
+
+    public void setProjectName(String projectName) { this.projectName = projectName; }
 
     public String getProjectType() {
         return projectType;
@@ -90,15 +119,24 @@ public class Project {
         this.users = users;
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
-                "id=" + id +
+                "id=" + projectId +
+                "owner=" + owner +
                 ", projectType='" + projectType + '\'' +
                 ", projectLanguages=" + projectLanguages +
                 ", projectTechnologies=" + projectTechnologies +
                 ", views=" + views +
-                ", users=" + users +
+//                ", users=" + users +
                 '}';
     }
 }
